@@ -32,6 +32,27 @@ public class ShuntingYardInfixToPostfixConverter : IInfixToPostfixConverter
 
                 operations.Push(token);
             }
+            else if (token is IFunctionToken)
+            {
+                operations.Push(token);
+            }
+            else if (token is ArgumentSeparatorToken)
+            {
+                while (operations.Count > 0 && !(operations.Peek() is LeftBracketToken))
+                {
+                    output.Add(operations.Pop());
+                }
+
+                if (operations.Count == 0)
+                {
+                    throw new InvalidOperationException("Mismatched brackets");
+                }
+                
+                if (operations.Peek() is IFunctionToken)
+                {
+                    output.Add(operations.Pop());
+                }
+            }
             else if (token is LeftBracketToken)
             {
                 operations.Push(token);
@@ -49,6 +70,11 @@ public class ShuntingYardInfixToPostfixConverter : IInfixToPostfixConverter
                 }
 
                 operations.Pop();
+                
+                if (operations.Count > 0 && operations.Peek() is IFunctionToken)
+                {
+                    output.Add(operations.Pop());
+                }
             }
             else
             {

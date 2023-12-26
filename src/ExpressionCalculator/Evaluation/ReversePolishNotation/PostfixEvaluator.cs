@@ -42,6 +42,28 @@ public class PostfixEvaluator(
                 double result = _evaluatorInvoker.Evaluate(evaluator, operands);
                 stack.Push(new NumberToken(result));
             }
+            else if (token is IFunctionToken functionToken)
+            {
+                int? argumentCount = functionToken.ArgumentCount;
+                var evaluator = _evaluatorProvider.GetEvaluatorForToken(functionToken.GetType());
+                
+                if(argumentCount is not null && stack.Count < argumentCount)
+                {
+                    throw new InvalidOperationException(
+                        "Not enough arguments for function " + functionToken.GetType().Name);
+                }
+                
+                var arguments = new List<IToken>();
+                for (int i = 0; i < argumentCount; i++)
+                {
+                    var argument = stack.Pop();
+                    
+                    arguments.Insert(0, argument);
+                }
+
+                double result = _evaluatorInvoker.Evaluate(evaluator, arguments);
+                stack.Push(new NumberToken(result));
+            }
         }
 
         if (stack.Count != 1 || stack.Peek() is not NumberToken resultToken)
