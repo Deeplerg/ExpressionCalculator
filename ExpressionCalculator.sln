@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionCalculator", "src\ExpressionCalculator\ExpressionCalculator.csproj", "{F577F7E0-FAE9-408D-8524-D1762178D7D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleUsage", "sample\SimpleUsage\SimpleUsage.csproj", "{3019606F-97C6-4478-B979-6922FC75AC4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomPlugin", "sample\CustomPlugin\CustomPlugin.csproj", "{B29930B4-F631-44F3-A438-685A43ED1B44}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F577F7E0-FAE9-408D-8524-D1762178D7D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F577F7E0-FAE9-408D-8524-D1762178D7D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F577F7E0-FAE9-408D-8524-D1762178D7D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F577F7E0-FAE9-408D-8524-D1762178D7D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3019606F-97C6-4478-B979-6922FC75AC4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3019606F-97C6-4478-B979-6922FC75AC4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3019606F-97C6-4478-B979-6922FC75AC4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3019606F-97C6-4478-B979-6922FC75AC4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9D23BD5-9D8D-4A27-A105-BC0537B68A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D23BD5-9D8D-4A27-A105-BC0537B68A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D23BD5-9D8D-4A27-A105-BC0537B68A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D23BD5-9D8D-4A27-A105-BC0537B68A39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B29930B4-F631-44F3-A438-685A43ED1B44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B29930B4-F631-44F3-A438-685A43ED1B44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B29930B4-F631-44F3-A438-685A43ED1B44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B29930B4-F631-44F3-A438-685A43ED1B44}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
