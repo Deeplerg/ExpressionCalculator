@@ -44,10 +44,10 @@ public class PostfixEvaluator(
             }
             else if (token is IFunctionToken functionToken)
             {
-                int? argumentCount = functionToken.ArgumentCount;
+                int argumentCount = functionToken.ArgumentCount;
                 var evaluator = _evaluatorProvider.GetEvaluatorForToken(functionToken.GetType());
                 
-                if(argumentCount is not null && stack.Count < argumentCount)
+                if(stack.Count < argumentCount)
                 {
                     throw new InvalidOperationException(
                         "Not enough arguments for function " + functionToken.GetType().Name);

@@ -2,5 +2,5 @@
 
 public interface IFunctionToken : IToken
 {
-    int? ArgumentCount { get; }
+    int ArgumentCount { get; }
 }

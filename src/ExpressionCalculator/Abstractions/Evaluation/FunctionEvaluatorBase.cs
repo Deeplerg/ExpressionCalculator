@@ -5,9 +5,9 @@ namespace ExpressionCalculator.Abstractions.Evaluation;
 
 public abstract class FunctionEvaluatorBase<T> : ITokenEvaluator<T> where T : IFunctionToken
 {
-    private readonly int? _argumentCount;
+    private readonly int _argumentCount;
 
-    public FunctionEvaluatorBase(int? argumentCount)
+    public FunctionEvaluatorBase(int argumentCount)
     {
         _argumentCount = argumentCount;
     }
@@ -19,7 +19,7 @@ public abstract class FunctionEvaluatorBase<T> : ITokenEvaluator<T> where T : IF
         if (!tokenList.All(t => t is NumberToken))
             throw new ArgumentException("All tokens must be " + nameof(NumberToken));
 
-        if (_argumentCount is not null && tokenList.Count != _argumentCount)
+        if (tokenList.Count != _argumentCount)
             throw new ArgumentException($"Can only evaluate {_argumentCount} arguments.");
 
         var numberTokens = tokens.Cast<NumberToken>();
