@@ -3,7 +3,7 @@ using ExpressionCalculator.Tokenization.Tokens;
 
 namespace ExpressionCalculator.Abstractions.Evaluation;
 
-public abstract class UnaryOperationEvaluatorBase<T> : ITokenEvaluator<T> where T : IToken
+public abstract class UnaryOperationEvaluatorBase<T> : ITokenEvaluator<T> where T : IOperatorToken
 {
     public double Evaluate(IEnumerable<IToken> tokens)
     {
