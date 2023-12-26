@@ -1,11 +1,11 @@
 ﻿using ExpressionCalculator.Abstractions.Evaluation;
 using ExpressionCalculator.Tokenization.Tokens.Functions;
 
-namespace ExpressionCalculator.Evaluation.TokenEvaluators;
+namespace ExpressionCalculator.Evaluation.TokenEvaluators.Functions;
 
-public class SineTokenEvaluator : FunctionEvaluatorBase<SineToken>
+public class TangentTokenEvaluator : FunctionEvaluatorBase<TangentToken>
 {
-    public SineTokenEvaluator() : base(1)
+    public TangentTokenEvaluator() : base(1)
     {
     }
 
@@ -13,6 +13,6 @@ public class SineTokenEvaluator : FunctionEvaluatorBase<SineToken>
     {
         double value = arguments.Single();
 
-        return Math.Sin(value);
+        return Math.Tan(value);
     }
 }

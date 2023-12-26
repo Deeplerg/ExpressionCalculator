@@ -1,7 +1,7 @@
 ﻿using ExpressionCalculator.Abstractions.Evaluation;
 using ExpressionCalculator.Tokenization.Tokens.Functions;
 
-namespace ExpressionCalculator.Evaluation.TokenEvaluators;
+namespace ExpressionCalculator.Evaluation.TokenEvaluators.Functions;
 
 public class LogarithmTokenEvaluator : FunctionEvaluatorBase<LogarithmToken>
 {

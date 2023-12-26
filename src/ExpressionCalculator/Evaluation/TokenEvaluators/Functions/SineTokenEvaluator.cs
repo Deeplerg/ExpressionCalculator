@@ -1,11 +1,11 @@
 ﻿using ExpressionCalculator.Abstractions.Evaluation;
 using ExpressionCalculator.Tokenization.Tokens.Functions;
 
-namespace ExpressionCalculator.Evaluation.TokenEvaluators;
+namespace ExpressionCalculator.Evaluation.TokenEvaluators.Functions;
 
-public class NaturalLogarithmTokenEvaluator : FunctionEvaluatorBase<NaturalLogarithmToken>
+public class SineTokenEvaluator : FunctionEvaluatorBase<SineToken>
 {
-    public NaturalLogarithmTokenEvaluator() : base(1)
+    public SineTokenEvaluator() : base(1)
     {
     }
 
@@ -13,6 +13,6 @@ public class NaturalLogarithmTokenEvaluator : FunctionEvaluatorBase<NaturalLogar
     {
         double value = arguments.Single();
 
-        return Math.Log(value);
+        return Math.Sin(value);
     }
 }

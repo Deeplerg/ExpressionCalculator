@@ -1,12 +1,12 @@
 ﻿using ExpressionCalculator.Abstractions.Evaluation;
 using ExpressionCalculator.Tokenization.Tokens.Operators;
 
-namespace ExpressionCalculator.Evaluation.TokenEvaluators;
+namespace ExpressionCalculator.Evaluation.TokenEvaluators.Operations;
 
-public class DivisionTokenEvaluator : BinaryOperationEvaluatorBase<DivisionToken>
+public class PowerTokenEvaluator : BinaryOperationEvaluatorBase<PowerToken>
 {
     public override double Calculate(double left, double right)
     {
-        return left / right;
+        return Math.Pow(left, right);
     }
 }

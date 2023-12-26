@@ -1,11 +1,11 @@
 ﻿using ExpressionCalculator.Abstractions.Evaluation;
 using ExpressionCalculator.Tokenization.Tokens.Functions;
 
-namespace ExpressionCalculator.Evaluation.TokenEvaluators;
+namespace ExpressionCalculator.Evaluation.TokenEvaluators.Functions;
 
-public class TangentTokenEvaluator : FunctionEvaluatorBase<TangentToken>
+public class NaturalLogarithmTokenEvaluator : FunctionEvaluatorBase<NaturalLogarithmToken>
 {
-    public TangentTokenEvaluator() : base(1)
+    public NaturalLogarithmTokenEvaluator() : base(1)
     {
     }
 
@@ -13,6 +13,6 @@ public class TangentTokenEvaluator : FunctionEvaluatorBase<TangentToken>
     {
         double value = arguments.Single();
 
-        return Math.Tan(value);
+        return Math.Log(value);
     }
 }

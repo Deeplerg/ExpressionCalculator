@@ -1,11 +1,11 @@
 ﻿using ExpressionCalculator.Abstractions.Evaluation;
 using ExpressionCalculator.Tokenization.Tokens.Functions;
 
-namespace ExpressionCalculator.Evaluation.TokenEvaluators;
+namespace ExpressionCalculator.Evaluation.TokenEvaluators.Functions;
 
-public class LogBase10TokenEvaluator : FunctionEvaluatorBase<LogBase10Token>
+public class CosineTokenEvaluator : FunctionEvaluatorBase<CosineToken>
 {
-    public LogBase10TokenEvaluator() : base(1)
+    public CosineTokenEvaluator() : base(1)
     {
     }
 
@@ -13,6 +13,6 @@ public class LogBase10TokenEvaluator : FunctionEvaluatorBase<LogBase10Token>
     {
         double value = arguments.Single();
 
-        return Math.Log10(value);
+        return Math.Cos(value);
     }
 }
