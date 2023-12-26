@@ -1,6 +1,6 @@
 ﻿using ExpressionCalculator.Abstractions.Tokenization.Parsing;
 
-namespace ExpressionCalculator.Tokenization.Parsers.Constants;
+namespace ExpressionCalculator.Tokenization.Parsers.Simple.Constants;
 
 public class DegreeTokenParser : ConstantTokenParserBase
 {

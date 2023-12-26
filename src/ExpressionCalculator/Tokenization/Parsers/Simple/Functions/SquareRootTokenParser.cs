@@ -1,7 +1,7 @@
 ﻿using ExpressionCalculator.Abstractions.Tokenization.Parsing;
 using ExpressionCalculator.Tokenization.Tokens.Functions;
 
-namespace ExpressionCalculator.Tokenization.Parsers.Simple;
+namespace ExpressionCalculator.Tokenization.Parsers.Simple.Functions;
 
 public class SquareRootTokenParser : MatchingTokenParserBase<SquareRootToken>
 {

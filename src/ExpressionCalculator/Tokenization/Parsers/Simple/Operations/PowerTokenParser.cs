@@ -1,7 +1,7 @@
 ﻿using ExpressionCalculator.Abstractions.Tokenization.Parsing;
 using ExpressionCalculator.Tokenization.Tokens.Operators;
 
-namespace ExpressionCalculator.Tokenization.Parsers.Simple;
+namespace ExpressionCalculator.Tokenization.Parsers.Simple.Operations;
 
 [ParsingPriority(1_105_000)]
 public class PowerTokenParser : MultipleMatchingTokenParserBase<PowerToken>
