@@ -64,7 +64,7 @@ public class PriorityBasedParserTypeCollection : IParserTypeCollection
 
     public IEnumerable<Type> GetAll()
     {
-        return _parserTypes;
+        return _parserTypes.Reverse();
     }
 
     private bool ParserFilter(Type type)
