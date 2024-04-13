@@ -11,9 +11,9 @@ namespace ExpressionCalculator.Tokenization;
 public class StringSlice : IEnumerable<char>
 {
     private readonly string _source;
-    private readonly int _toIndex;
-    private readonly int _fromIndex;
-    private readonly int _length;
+    private int _toIndex;
+    private int _fromIndex;
+    private int _length;
 
     /// <param name="source">The source string to slice</param>
     /// <param name="fromIndex">Inclusive lower bound</param>
@@ -83,6 +83,53 @@ public class StringSlice : IEnumerable<char>
     /// </summary>
     public int Length => _length;
 
+    public int FromIndex
+    {
+        get => _fromIndex;
+        set
+        {
+            if (value < 0)
+            {
+                throw new InvalidOperationException(
+                    $"{nameof(FromIndex)} must be greater than or equal to 0. Actual value: {value}");
+            }
+            
+            if(value > _toIndex)
+            {
+                throw new InvalidOperationException(
+                    $"{nameof(FromIndex)} must be less than or equal to {nameof(ToIndex)}. " +
+                    $"Actual value: {value}");
+            }
+            
+            _fromIndex = value;
+            _length = _toIndex - _fromIndex;
+        }
+    }
+    
+    public int ToIndex
+    {
+        get => _toIndex;
+        set
+        {
+            if (value > _source.Length)
+            {
+                throw new InvalidOperationException(
+                    $"{nameof(ToIndex)} must be less than or equal to the length of the source string. " +
+                    $"Actual value: {value}");
+            }
+            
+            if(value < _fromIndex)
+            {
+                throw new InvalidOperationException(
+                    $"{nameof(ToIndex)} must be greater than or equal to {nameof(FromIndex)}. " +
+                    $"Actual value: {value}");
+            }
+            
+            _toIndex = value;
+            _length = _toIndex - _fromIndex;
+        }
+    }
+    
     public IEnumerator<char> GetEnumerator()
     {
         return new StringSliceEnumerator(_source, fromIndex: _fromIndex, toIndex: _toIndex);

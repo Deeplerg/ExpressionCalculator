@@ -9,6 +9,13 @@ namespace ExpressionCalculator.Tokenization.Parsers;
 [ParsingPriority(2_000_000)]
 public class NumberTokenParser : ITokenParser<NumberToken>
 {
+    private readonly string _separator;
+    
+    public NumberTokenParser()
+    {
+        _separator = GetSeparator();
+    }
+    
     public bool CanParse(StringSlice input)
     {
         if (input.Length == 0)
@@ -31,10 +38,12 @@ public class NumberTokenParser : ITokenParser<NumberToken>
             charactersSkipped += beginsWithSeparatorResult.CharactersSkipped;
             wasSeparatorParsed = true;
         }
-        
-        for (int i = charactersSkipped; i < currentInput.Length; i = charactersSkipped)
+
+        int i = charactersSkipped;
+        var sliceFromCurrentPosition = new StringSlice(currentInput, i);
+        for ( ; i < currentInput.Length; i = charactersSkipped)
         {
-            var sliceFromCurrentPosition = new StringSlice(currentInput, i);
+            sliceFromCurrentPosition.FromIndex += i;
             
             if (TryParseSeparator(sliceFromCurrentPosition, out ParsingResult? separatorResult))
             {
@@ -70,12 +79,14 @@ public class NumberTokenParser : ITokenParser<NumberToken>
     }
 
     private bool StartsWithInteger(StringSlice input)
-        => char.IsDigit(input.First());
+        => char.IsDigit(input[0]);
 
     private bool StartsWithSeparatorAndDigit(StringSlice input)
     {
-        string separator = GetSeparator();
-        char? firstCharacterAfterSeparator = input.Skip(separator.Length).FirstOrDefault();
+        string separator = _separator;
+        char? firstCharacterAfterSeparator = null;
+        if (input.Length > separator.Length)
+            firstCharacterAfterSeparator = input[separator.Length];
 
         return StartsWithSeparator(input)
                && firstCharacterAfterSeparator is not null
@@ -84,7 +95,7 @@ public class NumberTokenParser : ITokenParser<NumberToken>
 
     private bool StartsWithSeparator(StringSlice input)
     {
-        string separator = GetSeparator();
+        string separator = _separator;
 
         return input.StartsWith(separator);
     }
@@ -97,7 +108,7 @@ public class NumberTokenParser : ITokenParser<NumberToken>
     {
         if (StartsWithSeparator(input))
         {
-            string separator = GetSeparator();
+            string separator = _separator;
 
             result = new ParsingResult(
                 Result: new StringBuilder(separator),

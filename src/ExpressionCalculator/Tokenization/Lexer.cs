@@ -21,24 +21,32 @@ public class Lexer : ILexer
     
     public IEnumerable<IToken> Tokenize(string input)
     {
-        var tokens = new List<IToken>();
-
         input = input.Replace(" ", string.Empty);
+        
+        var slice = new StringSlice(input);
         
         for (int i = 0; i < input.Length; )
         {
-            var slice = new StringSlice(input, i, input.Length);
+            slice.FromIndex = i;
 
-            object? parser = _parsers.FirstOrDefault(p => _parserInvoker.CanParse(p, slice));
+            // expanded from LINQ FirstOrDefault to avoid allocations
+            object? parser = null;
+            foreach (var p in _parsers)
+            {
+                if (_parserInvoker.CanParse(p, slice))
+                {
+                    parser = p;
+                    break;
+                }
+            }
+            
             if (parser is null)
                 throw new ParsingException("No parser found for input: " + slice);
-
+            
             var result = _parserInvoker.Parse(parser, slice);
             
             i += result.SkippedCharacters;
-            tokens.Add(result.Token);
+            yield return result.Token;
         }
-
-        return tokens;
     }
 }
