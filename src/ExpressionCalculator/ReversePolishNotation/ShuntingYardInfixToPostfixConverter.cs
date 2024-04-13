@@ -13,77 +13,94 @@ public class ShuntingYardInfixToPostfixConverter : IInfixToPostfixConverter
 
         foreach (var token in tokens)
         {
-            if (token is IOperatorToken operatorToken)
-            {
-                while (operations.Count > 0)
-                {
-                    var top = operations.Peek();
-                    if (top is IOperatorToken topOperatorToken &&
-                        (operatorToken.Associativity == AssociativityType.Left && operatorToken.Precedence <= topOperatorToken.Precedence ||
-                         operatorToken.Associativity == AssociativityType.Right && operatorToken.Precedence < topOperatorToken.Precedence))
-                    {
-                        output.Add(operations.Pop());
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
-                operations.Push(token);
-            }
-            else if (token is IFunctionToken)
-            {
-                operations.Push(token);
-            }
-            else if (token is ArgumentSeparatorToken)
-            {
-                while (operations.Count > 0 && !(operations.Peek() is LeftBracketToken))
-                {
-                    output.Add(operations.Pop());
-                }
-
-                if (operations.Count == 0)
-                {
-                    throw new InvalidOperationException("Mismatched brackets");
-                }
-                
-                if (operations.Peek() is IFunctionToken)
-                {
-                    output.Add(operations.Pop());
-                }
-            }
-            else if (token is LeftBracketToken)
-            {
-                operations.Push(token);
-            }
-            else if (token is RightBracketToken)
-            {
-                while (operations.Count > 0 && !(operations.Peek() is LeftBracketToken))
-                {
-                    output.Add(operations.Pop());
-                }
-
-                if (operations.Count == 0)
-                {
-                    throw new InvalidOperationException("Mismatched brackets");
-                }
-
-                operations.Pop();
-                
-                if (operations.Count > 0 && operations.Peek() is IFunctionToken)
-                {
-                    output.Add(operations.Pop());
-                }
-            }
-            else
-            {
-                output.Add(token);
-            }
+            HandleToken(token, operations, output);
         }
         
         output.AddRange(operations);
 
         return output;
+    }
+
+    private void HandleToken(IToken token, Stack<IToken> operations, List<IToken> output)
+    {
+        switch (token)
+        {
+            case IOperatorToken operatorToken:
+                HandleOperatorToken(operatorToken, operations, output);
+                break;
+                
+            case IFunctionToken:
+                operations.Push(token);
+                break;
+                
+            case ArgumentSeparatorToken:
+                HandleArgumentSeparatorToken(operations, output);
+                break;
+                
+            case LeftBracketToken:
+                operations.Push(token);
+                break;
+                
+            case RightBracketToken:
+                HandleRightBracketToken(operations, output);
+                break;
+                
+            default:
+                output.Add(token);
+                break;
+        }
+    }
+
+    private void HandleOperatorToken(IOperatorToken operatorToken, Stack<IToken> operations, List<IToken> output)
+    {
+        while (operations.Count > 0)
+        {
+            var top = operations.Peek();
+            if (top is IOperatorToken topOperatorToken &&
+                (operatorToken.Associativity == AssociativityType.Left && operatorToken.Precedence <= topOperatorToken.Precedence ||
+                 operatorToken.Associativity == AssociativityType.Right && operatorToken.Precedence < topOperatorToken.Precedence))
+            {
+                output.Add(operations.Pop());
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        operations.Push(operatorToken);
+    }
+    
+    private void HandleArgumentSeparatorToken(Stack<IToken> operations, List<IToken> output)
+    {
+        while (operations.Count > 0 && !(operations.Peek() is LeftBracketToken))
+        {
+            output.Add(operations.Pop());
+        }
+
+        if (operations.Count == 0)
+        {
+            throw new InvalidOperationException("Mismatched brackets");
+        }
+    }
+    
+    private void HandleRightBracketToken(Stack<IToken> operations, List<IToken> output)
+    {
+        while (operations.Count > 0 && !(operations.Peek() is LeftBracketToken))
+        {
+            output.Add(operations.Pop());
+        }
+
+        if (operations.Count == 0)
+        {
+            throw new InvalidOperationException("Mismatched brackets");
+        }
+
+        operations.Pop();
+                
+        if (operations.Count > 0 && operations.Peek() is IFunctionToken)
+        {
+            output.Add(operations.Pop());
+        }
     }
 }
