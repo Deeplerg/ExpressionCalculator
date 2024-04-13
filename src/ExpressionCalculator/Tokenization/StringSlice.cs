@@ -54,7 +54,7 @@ public class StringSlice : IEnumerable<char>
         : this(
             source: slice._source,
             fromIndex: slice._fromIndex + fromIndex,
-            toIndex: slice._toIndex + toIndex)
+            toIndex: slice._fromIndex + toIndex)
     {
     }
     
