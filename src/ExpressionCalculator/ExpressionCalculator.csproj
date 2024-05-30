@@ -4,6 +4,9 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>Deeplerg.ExpressionCalculator</PackageId>
+        <Version>1.0.0$(VersionSuffix)</Version>
+        <Authors>Deeplerg</Authors>
     </PropertyGroup>
 
     <ItemGroup>
