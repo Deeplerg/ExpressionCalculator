@@ -10,8 +10,8 @@ steps:
       NUGET_API_KEY:
         from_secret: nuget_api_key
     commands:
-      - dotnet pack "src/ExpressionCalculator/ExpressionCalculator.csproj" -c Release --runtime linux-musl-x64 -o pack-out --source https://api.nuget.org/v3/index.json
-      - dotnet nuget push pack-out/*.nupkg --api-key $NUGET_API_KEY
+      - dotnet pack "src/ExpressionCalculator/ExpressionCalculator.csproj" -c Release --runtime linux-musl-x64 -o pack-out
+      - dotnet nuget push pack-out/*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
 
 trigger:
   branch:
