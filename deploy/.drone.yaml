@@ -10,7 +10,7 @@ steps:
       NUGET_API_KEY:
         from_secret: nuget_api_key
     commands:
-      - dotnet pack "src/ExpressionCalculator/ExpressionCalculator.csproj" -c Release --runtime linux-musl-x64 --version_suffix ${DRONE_COMMIT_SHA:0:8} -o pack-out
+      - dotnet pack "src/ExpressionCalculator/ExpressionCalculator.csproj" -c Release --runtime linux-musl-x64 --version-suffix ${DRONE_COMMIT_SHA:0:8} -o pack-out
       - dotnet nuget push pack-out/*.nupkg --api-key $NUGET_API_KEY
 
 trigger:
