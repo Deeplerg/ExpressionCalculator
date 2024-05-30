@@ -1,0 +1,59 @@
+---
+kind: pipeline
+type: kubernetes
+name: prod-build-push
+
+steps:
+  - name: pack-push
+    image: mcr.microsoft.com/dotnet/sdk:8.0-alpine
+    environment:
+      NUGET_API_KEY:
+        from_secret: nuget_api_key
+    commands:
+      - dotnet pack "src/ExpressionCalculator/ExpressionCalculator.csproj" -c Release --runtime linux-musl-x64 --version_suffix ${DRONE_COMMIT_SHA:0:8} -o pack-out
+      - dotnet nuget push pack-out/*.nupkg --api-key $NUGET_API_KEY
+
+trigger:
+  branch:
+    - master
+  event:
+    include:
+      - promote
+  target:
+    - production
+
+---
+kind: pipeline
+type: kubernetes
+name: prod-build-only
+
+steps:
+  - name: build
+    image: mcr.microsoft.com/dotnet/sdk:8.0-alpine
+    commands:
+      - dotnet build -c Release
+
+trigger:
+  branch:
+    - master
+  event:
+    - pull_request
+    - push
+
+---
+kind: pipeline
+type: kubernetes
+name: dev-build
+
+steps:
+  - name: build
+    image: mcr.microsoft.com/dotnet/sdk:8.0-alpine
+    commands:
+      - dotnet build -c Release
+
+trigger:
+  branch:
+    - dev
+  event:
+    - pull_request
+    - push
