@@ -25,8 +25,13 @@ public class ExpressionCalculator
     
     public double Calculate(string input, CalculationStrategy strategy = CalculationStrategy.ReversePolishNotation)
     {
-        var postfixTokens = ConvertToReversePolishNotation(input);
-
+        var postfixTokens = strategy switch
+        {
+            CalculationStrategy.ReversePolishNotation => ConvertToReversePolishNotation(input),
+            CalculationStrategy.FromReversePolishNotation => _lexer.Tokenize(input),
+            _ => throw CreateUnknownCalculationStrategyException(strategy)
+        };
+        
         return Calculate(postfixTokens, strategy);
     }
     
@@ -34,8 +39,9 @@ public class ExpressionCalculator
     {
         return strategy switch
         {
-            CalculationStrategy.ReversePolishNotation => _postfixEvaluator.Evaluate(tokens),
-            _ => throw new ArgumentOutOfRangeException(nameof(strategy), strategy, "Unknown calculation strategy")
+            CalculationStrategy.ReversePolishNotation 
+                or CalculationStrategy.FromReversePolishNotation => _postfixEvaluator.Evaluate(tokens),
+            _ => throw CreateUnknownCalculationStrategyException(strategy)
         };
     }
     
@@ -46,4 +52,7 @@ public class ExpressionCalculator
         
         return postfixTokens;
     }
+
+    private Exception CreateUnknownCalculationStrategyException(CalculationStrategy strategy)
+        => throw new ArgumentOutOfRangeException(nameof(strategy), strategy, "Unknown calculation strategy");
 }
