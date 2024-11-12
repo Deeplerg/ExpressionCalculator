@@ -21,14 +21,18 @@ public class Lexer : ILexer
     
     public IEnumerable<IToken> Tokenize(string input)
     {
-        input = input.Replace(" ", string.Empty);
-        
         var slice = new StringSlice(input);
         
         for (int i = 0; i < input.Length; )
         {
             slice.FromIndex = i;
 
+            if (slice.StartsWith(' '))
+            {
+                i++;
+                continue;
+            }
+            
             // expanded from LINQ FirstOrDefault to avoid allocations
             object? parser = null;
             foreach (var p in _parsers)
