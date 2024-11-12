@@ -5,4 +5,6 @@ namespace ExpressionCalculator.Tokenization.Tokens.Operators;
 public class DivisionToken : OperatorTokenBase
 {
     public DivisionToken() : base(2, 2000, AssociativityType.Left) { }
+    
+    public override string GetStringRepresentation() => "/";
 }

@@ -4,4 +4,5 @@ namespace ExpressionCalculator.Tokenization.Tokens.Constants;
 
 public class PiToken : IToken
 {
+    public string GetStringRepresentation() => "pi";
 }

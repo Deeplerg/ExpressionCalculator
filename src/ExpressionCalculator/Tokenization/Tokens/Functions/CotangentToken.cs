@@ -7,4 +7,6 @@ public class CotangentToken : FunctionTokenBase
     public CotangentToken() : base(1)
     {
     }
+    
+    public override string GetStringRepresentation() => "cot";
 }

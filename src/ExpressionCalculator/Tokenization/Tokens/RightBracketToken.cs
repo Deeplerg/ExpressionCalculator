@@ -2,4 +2,7 @@
 
 namespace ExpressionCalculator.Tokenization.Tokens;
 
-public class RightBracketToken : IToken { }
+public class RightBracketToken : IToken
+{
+    public string GetStringRepresentation() => ")";
+}

@@ -4,4 +4,5 @@ namespace ExpressionCalculator.Tokenization.Tokens.Constants;
 
 public class EulerToken : IToken
 {
+    public string GetStringRepresentation() => "e";
 }

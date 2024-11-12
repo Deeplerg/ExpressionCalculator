@@ -5,4 +5,6 @@ namespace CustomPlugin.Sum;
 public class SumToken : FunctionTokenBase
 {
     public SumToken() : base(argumentCount: 3) { }
+    
+    public override string GetStringRepresentation() => "sum";
 }

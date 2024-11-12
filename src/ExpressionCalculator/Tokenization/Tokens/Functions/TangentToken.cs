@@ -7,4 +7,6 @@ public class TangentToken : FunctionTokenBase
     public TangentToken() : base(1)
     {
     }
+    
+    public override string GetStringRepresentation() => "tan";
 }

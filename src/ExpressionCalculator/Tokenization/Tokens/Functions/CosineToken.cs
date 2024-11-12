@@ -7,4 +7,6 @@ public class CosineToken : FunctionTokenBase
     public CosineToken() : base(1)
     {
     }
+    
+    public override string GetStringRepresentation() => "cos";
 }

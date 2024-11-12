@@ -4,4 +4,5 @@ namespace ExpressionCalculator.Tokenization.Tokens;
 
 public class ArgumentSeparatorToken : IToken
 {
+    public string GetStringRepresentation() => ";";
 }

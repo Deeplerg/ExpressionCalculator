@@ -5,4 +5,6 @@ namespace ExpressionCalculator.Tokenization.Tokens.Functions;
 public class LogarithmToken : FunctionTokenBase
 {
     public LogarithmToken() : base(2) { }
+    
+    public override string GetStringRepresentation() => "log";
 }

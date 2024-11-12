@@ -12,4 +12,6 @@ public abstract class OperatorTokenBase : IOperatorToken
     public int Arity { get; }
     public int Precedence { get; }
     public AssociativityType Associativity { get; }
+    
+    public abstract string GetStringRepresentation();
 }

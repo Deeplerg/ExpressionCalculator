@@ -7,4 +7,6 @@ public class LogBase10Token : FunctionTokenBase
     public LogBase10Token() : base(1)
     {
     }
+    
+    public override string GetStringRepresentation() => "lg";
 }

@@ -1,6 +1,6 @@
 ﻿namespace ExpressionCalculator.Abstractions.Tokenization.Tokens;
 
-public class FunctionTokenBase : IFunctionToken
+public abstract class FunctionTokenBase : IFunctionToken
 {
     public FunctionTokenBase(int argumentCount)
     {
@@ -8,4 +8,6 @@ public class FunctionTokenBase : IFunctionToken
     }
     
     public int ArgumentCount { get; }
+    
+    public abstract string GetStringRepresentation();
 }

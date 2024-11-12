@@ -7,4 +7,6 @@ public class RootToken : FunctionTokenBase
     public RootToken() : base(2)
     {
     }
+    
+    public override string GetStringRepresentation() => "root";
 }
